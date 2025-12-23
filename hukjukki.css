@@ -1,0 +1,90 @@
+* { box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #fcfcfc; scroll-behavior: smooth; }
+
+.main-title { 
+  font-size: 38px; font-weight: 900; text-align: center; margin: 30px 0 40px 0; 
+  background: linear-gradient(135deg, #78e08f 0%, #2f3542 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  display: flex; flex-direction: column; align-items: center;
+}
+.brand-sub { font-size: 13px; color: #8fa0b3; letter-spacing: 3px; -webkit-text-fill-color: #8fa0b3; }
+.brand-sub .highlight { font-size: 1.2em; font-weight: 800; color: #57606f; }
+.main-title::after { content: ""; display: block; width: 50px; height: 6px; background: linear-gradient(90deg, #78e08f, #60a3bc); margin-top: 15px; border-radius: 20px; }
+
+.main-wrapper { display: flex; gap: 25px; align-items: flex-start; }
+.left-report { flex: 6; min-width: 0; }
+.right-alarm { flex: 4; min-width: 0; background: #ffffff; border: 2px solid #57606f; border-radius: 15px; padding: 20px; position: sticky; top: 20px; }
+
+.box { background: #ffffff; border: 1px solid #ececec; padding: 20px; margin-bottom: 20px; border-radius: 12px; }
+.box-title { font-size: 16px; margin: 0 0 15px 0; border-bottom: 2px solid #f1f2f6; padding-bottom: 8px; }
+.input-row { display: flex; gap: 15px; margin-bottom: 15px; width: 100%; }
+.flex-item { flex: 1; min-width: 0; }
+
+label { display: block; font-size: 12px; font-weight: bold; color: #a4b0be; margin-bottom: 8px; }
+input, select { width: 100%; padding: 12px; border: 1px solid #dfe4ea; border-radius: 8px; background-color: #f1f2f6; font-size: 13px; }
+
+#mainBtn, .btn-calc { display: block; width: 100%; max-width: 380px; margin: 30px auto; padding: 16px; font-size: 19px; font-weight: bold; color: white; background: linear-gradient(135deg, #78e08f 0%, #60a3bc 100%); border: none; border-radius: 40px; cursor: pointer; }
+.btn-alarm { background-color: #747d8c; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+#addBuffBtn { width: 100%; background: #f1f2f6; border: 1px dashed #ced4da; padding: 10px; border-radius: 8px; color: #747d8c; cursor: pointer; margin-top: 15px; }
+
+.hidden { display: none !important; }
+#timerDisplay { text-align:center; font-weight:bold; color:#60a3bc; margin-bottom:20px; }
+
+#result { margin-top: 25px; padding: 25px; background: #fff; border-radius: 15px; border: 2px solid #78e08f; line-height: 1.8; }
+.report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+.report-item { font-size: 14px; display: flex; justify-content: space-between; }
+.profit-plus { color: #2ecc71; font-weight: bold; }
+.profit-minus { color: #e74c3c; font-weight: bold; }
+.buff-warn { width: 80px !important; text-align: center; }
+
+/* 숫자 입력창의 화살표(스핀 버튼) 상시 노출 */
+
+/* 크롬, 사파리, 엣지용 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1 !important; /* 투명도를 1로 고정하여 항상 보이게 함 */
+    height: auto;
+}
+/* 파이어폭스용 */
+input[type="number"] {
+    -moz-appearance: textfield; /* 기본 디자인 해제 */
+    appearance: auto; /* 화살표 강제 활성화 */
+}
+
+/* 1. 만 단위 입력창에 대한 시각적 강조 */
+#mesoBefore, #mesoAfter, #itemsValue {
+    border-left: 5px solid #78e08f; /* 만 단위 입력창은 초록색 선으로 표시 */
+}
+
+/* 2. 숫자 입력창 화살표(스핀 버튼) 디자인 보강 */
+input[type="number"]::-webkit-inner-spin-button {
+    cursor: pointer;
+    width: 25px; 
+    opacity: 1 !important;
+}
+
+/* 3. 리포트 3단 레이아웃 대응 */
+.report-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* 2단에서 3단으로 변경 */
+    gap: 0px !important;
+}
+
+/* 입력창 그룹 디자인 */
+.input-group-unit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.input-group-unit input {
+    flex: 1;
+}
+
+.unit-text {
+    font-weight: bold;
+    color: #2f3542;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-right: 5px;
+}

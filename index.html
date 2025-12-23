@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메랜 흑적기(Beta)</title>
+  <link rel="stylesheet" href="hukjukki.css">
+</head>
+<body>
+
+  <header>
+    <h1 class="main-title">
+      <div class="brand-sub">
+        <span class="highlight">H</span>uk<span class="highlight">J</span>uk<span class="highlight">K</span>i
+      </div>
+      메랜 흑적기 MVP
+    </h1>
+  </header>
+
+  <main class="main-wrapper">
+
+    <section class="left-report">
+      <div id="section-before">
+        <article class="box">
+          <h3 class="box-title">메소 및 비용 설정</h3>
+          <div class="input-row">
+            <div class="flex-item">
+              <label>사냥 시작 전 메소</label>
+              <div class="input-group-unit">
+                <input type="number" id="mesoBefore" placeholder="예: 320">
+                <span class="unit-text">만</span>
+              </div>
+            </div>
+            <div class="flex-item">
+              <label>기타 정산 (쩔비/심비)</label>
+              <div style="display: flex; gap: 5px; align-items: center;">
+                <select id="moneyType" style="flex: 1; padding: 12px 5px;">
+                  <option value="minus">지출 (-)</option>
+                  <option value="plus">수익 (+)</option>
+                  <option value="none">없음</option>
+                </select>
+                <div class="input-group-unit" style="flex: 1.5;">
+                  <input type="number" id="bringMoney" value="0" step="1">
+                  <span class="unit-text">만</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="box">
+          <h3 class="box-title">소모품 수량 설정</h3>
+          <div class="input-row">
+            <div class="flex-item">
+              <label>HP 포션 종류</label>
+              <select id="hpPotion"></select>
+              <div class="input-group-unit" style="margin-top:8px;">
+                <input type="number" id="hpBefore" placeholder="시작 개수" step="100">
+                <span class="unit-text">개</span>
+              </div>
+            </div>
+            <div class="flex-item">
+              <label>MP 포션 종류</label>
+              <select id="mpPotion"></select>
+              <div class="input-group-unit" style="margin-top:8px;">
+                <input type="number" id="mpBefore" placeholder="시작 개수" step="100">
+                <span class="unit-text">개</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <button id="mainBtn" onclick="startHunting()">사냥 시작 (1시간)</button>
+        <div id="timerDisplay" class="hidden"></div>
+      </div>
+
+      <div id="section-after" class="hidden">
+        <article class="box">
+          <h3 class="box-title">사냥 종료 데이터 입력</h3>
+          <div class="input-row">
+            <div class="flex-item">
+              <label>사냥 종료 후 메소</label>
+              <div class="input-group-unit">
+                <input type="number" id="mesoAfter" placeholder="예: 450">
+                <span class="unit-text">만</span>
+              </div>
+            </div>
+            <div class="flex-item">
+              <label>기타 득템 가치액</label>
+              <div class="input-group-unit">
+                <input type="number" id="itemsValue" value="0" step="1">
+                <span class="unit-text">만</span>
+              </div>
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="flex-item">
+              <label>HP 남은 개수</label>
+              <div class="input-group-unit">
+                <input type="number" id="hpAfter" placeholder="종료 개수">
+                <span class="unit-text">개</span>
+              </div>
+            </div>
+            <div class="flex-item">
+              <label>MP 남은 개수</label>
+              <div class="input-group-unit">
+                <input type="number" id="mpAfter" placeholder="종료 개수">
+                <span class="unit-text">개</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calculateResult()">사냥 결과 보기</button>
+        </article>
+        
+        <div id="result" class="hidden"></div>
+        <button id="resetBtn" class="btn-calc hidden" onclick="prepareNextHunt()" style="background: linear-gradient(135deg, #60a3bc 0%, #2f3542 100%); margin-top: 10px;">
+          다음 사냥 준비
+        </button>
+      </div>
+    </section>
+
+    <aside class="right-alarm">
+      <h2 class="alarm-header" style="margin-top:0;">버프 타이머</h2>
+      <p class="alarm-subtext">스킬과 레벨을 선택해 알람을 설정하세요.</p>
+      
+      <div id="buff-container">
+        <div class="buff-input-group">
+          <div class="input-row">
+            <div class="flex-item">
+              <label>스킬 선택</label>
+              <select class="buff-name" onchange="updateLevelOptions(this)"></select>
+            </div>
+            <div class="flex-item">
+              <label>스킬 레벨</label>
+              <select class="buff-level"></select>
+            </div>
+          </div>
+          <div class="input-row" style="align-items: center;">
+            <div class="flex-item">
+              <label>미리 알람 (초)</label>
+              <input type="number" class="buff-warn" value="30">
+            </div>
+            <div class="flex-item" style="flex:2; padding-top:20px;">
+                <button class="btn-alarm" onclick="startTimer(this)">알람 시작</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="addBuffBtn" onclick="addBuffGroup()" style="margin-bottom: 30px;">+ 다른 버프 추가</button>
+
+      <button id="pipBtn" onclick="togglePip()" style="background: #2f3542; color: white; padding: 15px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; border: 1px solid #444; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          🖥️ 게임 화면 위에 상황판 띄우기 (PIP)
+      </button>
+    </aside>
+
+  </main>
+
+  <script src="hukjukki.js"></script>
+</body>
+</html>
