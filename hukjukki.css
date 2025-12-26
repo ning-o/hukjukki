@@ -1,8 +1,12 @@
+/* [Style Sheet] 메랜 흑적기 디자인 시트 */
 * { box-sizing: border-box; }
 body { font-family: 'Malgun Gothic', sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #fcfcfc; scroll-behavior: smooth; }
 
-.main-title { 
-  font-size: 38px; font-weight: 900; text-align: center; margin: 30px 0 40px 0; 
+.clickable-logo { cursor: pointer; user-select: none; }
+.clickable-logo:active { transform: scale(0.98); transition: transform 0.1s; }
+
+.main-title {
+  font-size: 38px; font-weight: 900; text-align: center; margin: 30px 0 40px 0;
   background: linear-gradient(135deg, #78e08f 0%, #2f3542 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   display: flex; flex-direction: column; align-items: center;
@@ -24,67 +28,39 @@ label { display: block; font-size: 12px; font-weight: bold; color: #a4b0be; marg
 input, select { width: 100%; padding: 12px; border: 1px solid #dfe4ea; border-radius: 8px; background-color: #f1f2f6; font-size: 13px; }
 
 #mainBtn, .btn-calc { display: block; width: 100%; max-width: 380px; margin: 30px auto; padding: 16px; font-size: 19px; font-weight: bold; color: white; background: linear-gradient(135deg, #78e08f 0%, #60a3bc 100%); border: none; border-radius: 40px; cursor: pointer; }
-.btn-alarm { background-color: #747d8c; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-#addBuffBtn { width: 100%; background: #f1f2f6; border: 1px dashed #ced4da; padding: 10px; border-radius: 8px; color: #747d8c; cursor: pointer; margin-top: 15px; }
-
+#timerDisplay { text-align:center; font-weight:bold; color:#60a3bc; margin-bottom:20px; font-size: 20px; }
 .hidden { display: none !important; }
-#timerDisplay { text-align:center; font-weight:bold; color:#60a3bc; margin-bottom:20px; }
 
 #result { margin-top: 25px; padding: 25px; background: #fff; border-radius: 15px; border: 2px solid #78e08f; line-height: 1.8; }
-.report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
-.report-item { font-size: 14px; display: flex; justify-content: space-between; }
-.profit-plus { color: #2ecc71; font-weight: bold; }
-.profit-minus { color: #e74c3c; font-weight: bold; }
-.buff-warn { width: 80px !important; text-align: center; }
+.report-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0px !important; }
+.input-group-unit { display: flex; align-items: center; gap: 5px; }
+.unit-text { font-weight: bold; color: #2f3542; font-size: 14px; white-space: nowrap; }
 
-/* 숫자 입력창의 화살표(스핀 버튼) 상시 노출 */
+/* Buff Input Style */
+.buff-name, div.custom-time-group.buff-level { height: 40px !important; box-sizing: border-box !important; }
+div.custom-time-group.buff-level { display: inline-flex !important; align-items: center; gap: 4px; background: #f8f9fa; border: 1px solid #ced4da; border-radius: 8px; padding: 0 4px; width: 100%; }
+.custom-time-group.buff-level input { flex: 1; height: 32px !important; text-align: center; border: 1px solid #dee2e6; border-radius: 4px; }
 
-/* 크롬, 사파리, 엣지용 */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    opacity: 1 !important; /* 투명도를 1로 고정하여 항상 보이게 함 */
-    height: auto;
-}
-/* 파이어폭스용 */
-input[type="number"] {
-    -moz-appearance: textfield; /* 기본 디자인 해제 */
-    appearance: auto; /* 화살표 강제 활성화 */
-}
-
-/* 1. 만 단위 입력창에 대한 시각적 강조 */
-#mesoBefore, #mesoAfter, #itemsValue {
-    border-left: 5px solid #78e08f; /* 만 단위 입력창은 초록색 선으로 표시 */
-}
-
-/* 2. 숫자 입력창 화살표(스핀 버튼) 디자인 보강 */
-input[type="number"]::-webkit-inner-spin-button {
-    cursor: pointer;
-    width: 25px; 
-    opacity: 1 !important;
-}
-
-/* 3. 리포트 3단 레이아웃 대응 */
-.report-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* 2단에서 3단으로 변경 */
-    gap: 0px !important;
-}
-
-/* 입력창 그룹 디자인 */
-.input-group-unit {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.input-group-unit input {
-    flex: 1;
-}
-
-.unit-text {
+/* ------------------------------------------------------------
+   [UI Modification] 사냥 시간 입력창 숫자 잘림 현상 수정 (가장 하단 배치)
+   ------------------------------------------------------------ */
+#hunt-duration-input {
+    width: 80px !important;
+    height: 45px !important;
+    background: #ffffff;
+    border: 2px solid #78e08f;
+    border-radius: 8px;
+    text-align: center !important;
     font-weight: bold;
-    color: #2f3542;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-right: 5px;
+    font-size: 22px;
+    outline: none;
+    padding: 0 !important;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#hunt-duration-input::-webkit-outer-spin-button,
+#hunt-duration-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

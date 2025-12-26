@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>메랜 흑적기(Beta)</title>
+  <title>메랜 흑적기</title>
   <link rel="stylesheet" href="hukjukki.css">
 </head>
+
 <body>
 
   <header>
-    <h1 class="main-title">
+    <h1 class="main-title clickable-logo" id="mainLogo">
       <div class="brand-sub">
-        <span class="highlight">H</span>uk<span class="highlight">J</span>uk<span class="highlight">K</span>i
+        <span class="highlight">흑</span>자<span class="highlight">적</span>자<span class="highlight">계</span>산기
       </div>
-      메랜 흑적기 MVP
+      메랜 흑적기 Beta
     </h1>
   </header>
 
   <main class="main-wrapper">
-
     <section class="left-report">
       <div id="section-before">
         <article class="box">
@@ -35,7 +36,7 @@
               <label>기타 정산 (쩔비/심비)</label>
               <div style="display: flex; gap: 5px; align-items: center;">
                 <select id="moneyType" style="flex: 1; padding: 12px 5px;">
-                  <option value="minus" selected>지출 (-)</option> 
+                  <option value="minus" selected>지출 (-)</option>
                   <option value="plus">수익 (+)</option>
                   <option value="none">없음</option>
                 </select>
@@ -70,7 +71,24 @@
           </div>
         </article>
 
+        <div style="text-align: center; margin-bottom: 10px;">
+          <button type="button" id="toggle-hunt-setting" onclick="toggleHuntSetting()"
+            style="background: none; border: 1px solid #dfe4ea; color: #8fa0b3; padding: 5px 15px; border-radius: 20px; font-size: 12px; cursor: pointer;">
+            ⚙️ 사냥 시간 설정
+          </button>
+
+          <div id="hunt-setting-panel" class="hidden"
+            style="margin-top: 15px; background: #f8f9fa; padding: 20px; border-radius: 12px; border: 1px dashed #ced4da;">
+            <label style="color: #57606f; margin-bottom: 12px; display: block; font-weight: bold;">목표 사냥 시간 설정</label>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <input type="number" id="hunt-duration-input" value="60" min="1">
+              <span style="font-weight: bold; color: #2f3542; font-size: 18px;">분</span>
+            </div>
+            <p style="font-size: 11px; color: #a4b0be; margin-top: 10px;">* 기본값은 60분(1시간)입니다.</p>
+          </div>
+
         <button id="mainBtn" onclick="startHunting()">사냥 시작 (1시간)</button>
+        
         <div id="timerDisplay" class="hidden"></div>
       </div>
 
@@ -93,7 +111,6 @@
               </div>
             </div>
           </div>
-
           <div class="input-row">
             <div class="flex-item">
               <label>HP 남은 개수</label>
@@ -110,7 +127,6 @@
               </div>
             </div>
           </div>
-
           <div class="input-row" style="margin-top: 15px;">
             <div class="flex-item">
               <label>획득 경험치</label>
@@ -121,76 +137,53 @@
             </div>
             <div class="flex-item"></div>
           </div>
-
           <button class="btn-calc" onclick="calculateResult()">사냥 결과 보기</button>
         </article>
-        
         <div id="result" class="hidden"></div>
-        <button id="resetBtn" class="btn-calc hidden" onclick="prepareNextHunt()" style="background: linear-gradient(135deg, #60a3bc 0%, #2f3542 100%); margin-top: 10px;">
-          다음 사냥 준비
-        </button>
+        <button id="resetBtn" class="btn-calc hidden" onclick="prepareNextHunt()"
+          style="background: linear-gradient(135deg, #60a3bc 0%, #2f3542 100%); margin-top: 10px;">다음 사냥 준비</button>
       </div>
     </section>
 
     <aside class="right-alarm">
-      <h2 class="alarm-header" style="margin-top:0;">버프 타이머 설정</h2>
+      <h2 class="alarm-header" style="margin-top:0;">버프 알리미</h2>
       <p class="alarm-subtext">스킬을 설정하고 아래 리스트에 등록하세요.</p>
-      
       <div id="buff-container">
-        <div class="buff-input-group" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px dashed #485460; margin-bottom: 10px;">
+        <div class="buff-input-group"
+          style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px dashed #485460; margin-bottom: 10px;">
           <div class="input-row">
-            <div class="flex-item">
-              <label>스킬 선택</label>
-              <select class="buff-name" onchange="updateLevelOptions(this)"></select>
-            </div>
-            <div class="flex-item">
-              <label>스킬 레벨</label>
-              <select class="buff-level"></select>
-            </div>
+            <div class="flex-item"><label>스킬 선택</label><select class="buff-name"
+                onchange="updateLevelOptions(this)"></select></div>
+            <div class="flex-item"><label>스킬 레벨</label><select class="buff-level"></select></div>
           </div>
           <div class="input-row" style="margin-top: 10px;">
             <div class="flex-item">
               <label>미리 알람 (경고 시간)</label>
-              <div class="input-group-unit">
-                <input type="number" class="buff-warn" value="30" step="5">
-                <span class="unit-text">초 전</span>
-              </div>
+              <div class="input-group-unit"><input type="number" class="buff-warn" value="30" step="5"><span
+                  class="unit-text">초 전</span></div>
             </div>
             <div class="flex-item"></div>
           </div>
         </div>
       </div>
-
-      <button id="addBuffBtn" onclick="addBuffGroup()" 
-          style="width: 100%; 
-                padding: 16px; 
-                background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); 
-                color: white; 
-                font-weight: bold; 
-                font-size: 16px; 
-                border: none; 
-                border-radius: 8px; 
-                cursor: pointer; 
-                margin-bottom: 25px; 
-                box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); 
-                transition: transform 0.1s, background 0.2s;">
-                ✚ 버프 추가
-      </button>
-
-      <div id="pip-preview-zone" style="padding: 15px; background: #1e272e; border-radius: 10px; border: 2px solid #60a3bc; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
-        <h3 style="margin-top:0; font-size: 14px; color: #60a3bc; border-bottom: 1px solid #34495e; padding-bottom: 8px; letter-spacing: 1px; text-align: center;">버프 설정 미리보기</h3>
+      <button id="addBuffBtn" onclick="addBuffGroup()"
+        style="width: 100%; padding: 16px; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; font-weight: bold; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); transition: transform 0.1s, background 0.2s;">✚
+        버프 추가</button>
+      <div id="pip-preview-zone"
+        style="padding: 15px; background: #1e272e; border-radius: 10px; border: 2px solid #60a3bc; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
+        <h3
+          style="margin-top:0; font-size: 14px; color: #60a3bc; border-bottom: 1px solid #34495e; padding-bottom: 8px; letter-spacing: 1px; text-align: center;">
+          버프 설정 미리보기</h3>
         <div id="pip-preview-list" style="min-height: 80px; font-size: 13px; color: #d1d8e0; padding: 10px 0;">
           <div style="text-align: center; color: #57606f; margin-top: 20px;">추가된 버프가 없습니다.</div>
         </div>
       </div>
-
-      <button id="pipBtn" onclick="togglePip()" style="margin-top:15px; background: linear-gradient(135deg, #60a3bc 0%, #3c6382 100%); color: white; padding: 16px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-        버프 타이머 실행 (PIP)
-      </button>
+      <button id="pipBtn" onclick="togglePip()"
+        style="margin-top:15px; background: linear-gradient(135deg, #60a3bc 0%, #3c6382 100%); color: white; padding: 16px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">버프
+        타이머 실행 (PIP)</button>
     </aside>
-
   </main>
-
   <script src="hukjukki.js"></script>
 </body>
+
 </html>
