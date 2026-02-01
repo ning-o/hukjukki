@@ -121,7 +121,7 @@ export class BuffManager {
             levelText = `Lv.${lv}`;
         }
         
-        const warnTime = parseInt(document.querySelector('.buff-warn').value) || 30;
+        const warnTime = parseInt(document.querySelector('.buff-warn').value) || 0;
 
         const newBuff = {
             id: Date.now(),
