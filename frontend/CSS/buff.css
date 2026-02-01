@@ -1,0 +1,75 @@
+/**
+ * @file buff.css
+ * @description 버프 알리미 UI, 커스텀 스킬 설정 및 PIP 창 전용 스타일
+ */
+
+/* --- 버프 메인 버튼 --- */
+#addBuffBtn { width: 100%; min-height: 55px; border-radius: 8px; font-size: 16px; font-weight: bold; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; margin-bottom: 25px !important; }
+#pipBtn { width: 100%; height: 55px; border-radius: 8px; font-size: 16px; font-weight: bold; background: linear-gradient(135deg, #60a3bc 0%, #3c6382 100%); color: white; }
+
+/* --- 스킬 직접 입력(Custom) UI --- */
+#custom-skill-ui { margin-top: 15px; }
+.report-input { width: 100%; height: 45px; background-color: #f0f2f5; border: 2px solid #ccc; border-radius: 10px; padding: 0 15px; font-size: 12px; }
+
+/* 시간 입력 레이아웃 (비율 38:62) */
+#custom-skill-ui .flex-item:first-child { flex: 0 0 38% !important; }
+#custom-skill-ui .flex-item:last-child { flex: 0 0 62% !important; display: flex; flex-direction: column; align-items: flex-start; }
+
+/* --- 직접입력 시간 설정 영역 --- */
+.time-input-container { 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 5px; 
+    
+    margin-top: 3px; 
+    
+    margin-left: 7px; 
+    width: 100%; 
+}
+
+.time-input-container input { 
+    width: 68px !important; 
+    height: 40px !important;
+    border: 1px solid #82e0aa !important; 
+    text-align: center; 
+    border-radius: 4px; 
+    font-size: 14px !important;
+    flex: none !important; /* 칸이 막 늘어나는 현상 방지 */
+}
+
+/* 목록 다시 선택 버튼 (취소) */
+#cancel-custom-btn {
+    white-space: nowrap; padding: 0 12px; background: #ff6b6b !important; color: white !important;
+    border-radius: 20px !important; font-size: 11px !important; font-weight: bold; height: 32px !important;
+    margin-bottom: 10px; margin-right: 25px; margin-left: auto;
+}
+
+/* --- 등록된 버프 아이템 (미리보기 & PIP 공용) --- */
+.registered-buff-item { 
+    background: #2f3136; 
+    padding: 6px 8px; /* 여백을 다시 슬림하게 조정 */
+    margin-bottom: 5px; 
+    border-left: 4px solid #60a3bc; 
+    
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    
+    /* [Restore] 줄바꿈 방지 (무조건 한 줄 유지) */
+    white-space: nowrap; 
+    overflow: hidden; /* 혹시 넘치더라도 레이아웃 깨짐 방지 */
+}
+.buff-info { text-align: left; min-width: 80px; }
+.buff-name-text { font-weight: bold; color: #fff; font-size: 13px; }
+.timer-text { font-size: 16px; font-weight: bold; font-family: monospace; }
+.timer-text.safe { color: #2ecc71; }
+.timer-text.warn { color: #e74c3c; }
+
+/* 버프 컨트롤 버튼 */
+.buff-controls { display: flex; gap: 4px; }
+.ctl-btn { border-radius: 4px; padding: 2px 6px; font-size: 11px; font-weight: bold; color: white; }
+.ctl-btn.gray { background: #57606f; }
+.ctl-btn.red { background: #e74c3c; }
+.ctl-btn.green { background: #2ecc71; }
+.ctl-btn.orange { background: #f39c12; }
