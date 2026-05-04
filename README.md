@@ -65,6 +65,8 @@
 - 흑적기(흑자 적자 계산기) 프로젝트 최초 배포
 - 사냥 효율 계산 및 기본 UI 구현
 
+<br>
+
 ### 사냥 리포트 사용 모습
 <img width="558" height="1283" alt="흑적기_사냥 리포트" src="https://github.com/user-attachments/assets/3442f58f-65c2-44b0-a3cd-4fc2f4fe5a74" />
 
