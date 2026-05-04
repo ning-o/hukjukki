@@ -66,7 +66,8 @@
 - 사냥 효율 계산 및 기본 UI 구현
 
 ### 사냥 리포트 사용 모습
-![Uploading 흑적기_사냥 리포트.jpg…]()
+<img width="558" height="1283" alt="흑적기_사냥 리포트" src="https://github.com/user-attachments/assets/3442f58f-65c2-44b0-a3cd-4fc2f4fe5a74" />
+
 
 ### 버프 알리미 사용 모습
 <img width="1644" height="704" alt="흑적기_버프 알리미" src="https://github.com/user-attachments/assets/dbf37237-fe7b-4a0f-ba91-f9cb98154de2" />
