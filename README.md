@@ -65,4 +65,13 @@
 - 흑적기(흑자 적자 계산기) 프로젝트 최초 배포
 - 사냥 효율 계산 및 기본 UI 구현
 
+### 사냥 리포트 사용 모습
+![Uploading 흑적기_사냥 리포트.jpg…]()
+
+### 버프 알리미 사용 모습
+<img width="1644" height="704" alt="흑적기_버프 알리미" src="https://github.com/user-attachments/assets/dbf37237-fe7b-4a0f-ba91-f9cb98154de2" />
+
+
+
+
       
