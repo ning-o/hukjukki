@@ -238,12 +238,12 @@ class MainController {
         } else {
             // 2. 사냥 중이 아닐 때
             
-            // 시간이 조금이라도 줄어들었고(진행됨), 0보다는 클 때 -> [재개]
+            // 시간이 조금이라도 줄어들었고(진행됨), 0보다는 클 때 -> 재개
             if (this.timeLeft > 0 && this.timeLeft < totalDuration) {
                 mainBtn.innerText = "사냥 재개";
                 mainBtn.style.background = "#2ecc71"; 
             } else {
-                // 시간이 꽉 차있거나(초기상태), 0일 때 -> [시작]
+                // 시간이 꽉 차있거나(초기상태), 0일 때 -> 시작
                 mainBtn.innerText = "사냥 시작";
             }
         }

@@ -199,7 +199,7 @@ export class BuffManager {
     }
 
     /**
-     * [Sync] 모든 버프 시작
+     * 모든 버프 시작
      */
     startAllBuffs(mainInstance) {
         if (this.buffs.length === 0) return;
@@ -214,7 +214,7 @@ export class BuffManager {
     }
 
     /**
-     * [Sync] 모든 버프 초기화
+     * 모든 버프 초기화
      */
     resetAllBuffs(mainInstance) {
         if (this.buffs.length === 0) return;
@@ -326,7 +326,7 @@ export class BuffManager {
         } catch (e) { console.error("PIP 오류:", e); }
     }
 
-    // PIP 창 업데이트 및 동기화 (기존 순정 버전 복구)
+    // PIP 창 업데이트 및 동기화
     updatePipWindow(mainInstance) {
         if (!this.pipWindow || this.pipWindow.closed) return;
         
@@ -337,7 +337,6 @@ export class BuffManager {
         if (!pipDoc.getElementById('pip-layout')) {
             pipDoc.body.style.backgroundColor = "#1e2124";
             
-            // 본진 CSS 스타일 복사해서 PIP에도 적용
             [...document.styleSheets].forEach(styleSheet => {
                 try {
                     const cssRules = [...styleSheet.cssRules].map(rule => rule.cssText).join('');
@@ -347,8 +346,8 @@ export class BuffManager {
                 } catch (e) { }
             });
 
-            // [수정된 부분] 타이머 섹션 스타일 원복 (한 줄 배치)
-            // display: flex; justify-content: space-between; -> 이것이 핵심입니다.
+            // 타이머 섹션 스타일 한 줄 배치
+            // display: flex; justify-content: space-between;
             pipDoc.body.innerHTML = `
                 <div id="pip-layout" style="color:white; padding:10px;">
                     <div id="pip-timer-section" style="
@@ -367,7 +366,7 @@ export class BuffManager {
             mainBtn.onclick = () => mainInstance.handleHuntControl();
         }
 
-        // --- [데이터 동기화 로직] ---
+        // --- 데이터 동기화 로직 ---
         const isHunting = mainInstance ? mainInstance.isHunting : false;
         const timeLeft = mainInstance ? mainInstance.timeLeft : 0;
         

@@ -56,9 +56,9 @@
     align-items: center; 
     justify-content: space-between;
     
-    /* [Restore] 줄바꿈 방지 (무조건 한 줄 유지) */
+    /* 줄바꿈 방지 */
     white-space: nowrap; 
-    overflow: hidden; /* 혹시 넘치더라도 레이아웃 깨짐 방지 */
+    overflow: hidden; /* 혹시 넘어가더라도 레이아웃 깨짐 방지 */
 }
 .buff-info { text-align: left; min-width: 80px; }
 .buff-name-text { font-weight: bold; color: #fff; font-size: 13px; }
